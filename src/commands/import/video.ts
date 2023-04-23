@@ -1,11 +1,10 @@
 import {Args, Command} from '@oclif/core'
 import {AppDataSource} from '../../modules/providers/datasource.provider'
-import {Video} from '../../modules/entities/video.entity'
-import {ClassPart} from '../../modules/entities/class-part.entity'
 import * as fs from 'fs'
-import * as path from 'path'
 import {s3} from '../../modules/providers/s3.provider'
+import {Video} from '../../modules/database/entities/section/video.entity'
 
+// noinspection JSUnusedGlobalSymbols
 export default class Import extends Command {
   static description = 'Importa os dados do telegram'
 
@@ -17,7 +16,6 @@ export default class Import extends Command {
   }
 
   private readonly videoRepository = AppDataSource.getRepository(Video);
-  private readonly classPartRepository = AppDataSource.getRepository(ClassPart);
 
   async run(): Promise<void> {
     const {args} = await this.parse(Import)

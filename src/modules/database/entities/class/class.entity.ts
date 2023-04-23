@@ -5,10 +5,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Module } from '@infra/database/entities/module/module.entity';
-import { Section } from '@infra/database/entities/section/section.entity';
+import { Module } from '../module/module.entity';
+import { Section } from '../section/section.entity';
 import { Expose, Transform } from 'class-transformer';
-import { Progress } from '@infra/database/entities/profile/progress.entity';
+import { Progress } from '../profile/progress.entity';
 
 @Entity()
 export class Class {
@@ -31,7 +31,7 @@ export class Class {
   sections: Section[];
 
   @Expose({ name: 'progress' })
-  @Transform(({ value, obj }) => {
+  @Transform(({ value, obj }: { value: Progress[], obj: Class }) => {
     if (value && value.length > 0) return value[0];
     const progress = new Progress();
     progress.entityId = obj.id;

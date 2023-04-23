@@ -1,10 +1,10 @@
 import {DataSource} from 'typeorm'
-import {Class} from '../entities/class.entity'
-import {ClassPart} from '../entities/class-part.entity'
-import {Module} from '../entities/module.entity'
 
 import * as env from 'dotenv';
-import {Video} from '../entities/video.entity'
+import {Class} from '../database/entities/class/class.entity'
+import {Section} from '../database/entities/section/section.entity'
+import {Module} from '../database/entities/module/module.entity'
+import {Video} from '../database/entities/section/video.entity'
 env.config();
 
 export const AppDataSource = new DataSource({
@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: true,
-  entities: [Class, ClassPart, Module, Video],
+  entities: [Class, Section, Module, Video],
   subscribers: [],
   migrations: [],
 })

@@ -1,12 +1,12 @@
 import {Args, Command} from '@oclif/core'
 import * as fs from 'node:fs'
 import {AppDataSource} from '../../modules/providers/datasource.provider'
-import {Module} from '../../modules/entities/module.entity'
-import {Class} from '../../modules/entities/class.entity'
-import {ClassPart} from '../../modules/entities/class-part.entity'
 import {TelegramChannelData} from '../../modules/interfaces/telegram-channel-data.interface'
 import {PartNormalized} from '../../modules/interfaces/part-normalized.interface'
-import {Video} from '../../modules/entities/video.entity'
+import {Module} from '../../modules/database/entities/module/module.entity'
+import {Class} from '../../modules/database/entities/class/class.entity'
+import {Section} from '../../modules/database/entities/section/section.entity'
+import {Video} from '../../modules/database/entities/section/video.entity'
 
 export default class Import extends Command {
   static description = 'Importa os dados do telegram'
@@ -19,7 +19,7 @@ export default class Import extends Command {
 
   private readonly moduleRepository = AppDataSource.getRepository(Module);
   private readonly classRepository = AppDataSource.getRepository(Class);
-  private readonly classPartRepository = AppDataSource.getRepository(ClassPart);
+  private readonly sectionRepository = AppDataSource.getRepository(Section);
   private readonly videoRepository = AppDataSource.getRepository(Video);
 
   async run(): Promise<void> {
@@ -90,7 +90,7 @@ export default class Import extends Command {
   }
 
   private async saveClassesParts(aulas: PartNormalized[]) {
-    return this.classPartRepository.save(
+    return this.sectionRepository.save(
       aulas.map(({
         id,
         parte,

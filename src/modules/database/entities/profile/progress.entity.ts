@@ -1,6 +1,6 @@
 import { Column, ManyToOne, PrimaryColumn } from 'typeorm';
-import { Profile } from '@infra/database/entities/profile/profile.entity';
 import { Exclude, Expose } from 'class-transformer';
+import {Profile} from './profile.entity'
 
 export class Progress {
   @PrimaryColumn()
