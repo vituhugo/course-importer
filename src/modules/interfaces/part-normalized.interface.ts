@@ -1,3 +1,12 @@
+export interface VideoNormalize {
+  id: number
+  path: string
+  duration: number
+  mimeType: string
+  size: number
+  thumbnailPath?: string
+}
+
 export interface PartNormalized {
   id: number
   modulo: string
@@ -6,12 +15,5 @@ export interface PartNormalized {
   aulaIndex: number
   parte: string
   parteIndex: number
-  video: {
-    id: number,
-    path: string,
-    duration: number,
-    mimeType: string,
-    size: number,
-    thumbnailPath?: string,
-  }
+  video: VideoNormalize
 }
